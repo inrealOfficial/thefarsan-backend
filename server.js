@@ -71,4 +71,7 @@ app.get("/", (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 const PORT = process.env.PORT;
-app.listen(5000, console.log("Server running on port 5000"));
+app.listen(
+  process.env.PORT || 5000,
+  console.log("Server running on port 5000")
+);
