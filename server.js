@@ -20,6 +20,7 @@ const whitelist = [
   "http://localhost:3000",
   "http://localhost:8080",
   "https://farsanapp.herokuapp.com/",
+  "https://farsan.netlify.app",
 ];
 const corsOptions = {
   origin: function (origin, callback) {
