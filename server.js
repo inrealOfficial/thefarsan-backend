@@ -9,6 +9,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 import Razorpay from "razorpay";
 import path from "path";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 connectDB();
@@ -16,20 +17,50 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // ** MIDDLEWARE ** //
-const whitelist = ["http://localhost:3000", "https://thefarsan.in"];
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin);
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable");
-      callback(null, true);
-    } else {
-      console.log("Origin rejected");
-      callback(new Error("Not allowed by CORS"));
+// const whitelist = ["http://localhost:3000", "https://thefarsan.in"];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     console.log("** Origin of request " + origin);
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       console.log("Origin acceptable");
+//       callback(null, true);
+//     } else {
+//       console.log("Origin rejected");
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+// };
+
+app.post("/send", async (req, res) => {
+  let transporter = nodemailer.createTransport({
+    host: "smtpout.secureserver.net",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: "ankita@thefarsan.in", // generated ethereal user
+      pass: "Ankita@03", // generated ethereal password
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(
+    {
+      from: '"Ankita Malik" <ankita@thefarsan.in>', // sender address
+      to: "aryan23062001@gmail.com", // list of receivers
+      subject: "Hello ✔", // Subject line
+      text: "Hello world? ", // plain text body
+      html: "<b>Hello world?</b>", // html body
+    },
+    (err, info) => {
+      if (err) {
+        return console.log(err);
+      } else {
+        console.log("Message sent: %s", info.messageId);
+      }
     }
-  },
-};
-app.use(cors(corsOptions));
+  );
+});
+// app.use(cors(corsOptions));
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);

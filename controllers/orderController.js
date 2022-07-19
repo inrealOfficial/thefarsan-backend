@@ -1,6 +1,7 @@
 import Order from "../models/orderModel.js";
 import asyncHandler from "express-async-handler";
-
+import nodemailer from "nodemailer";
+import User from "../models/userModel.js";
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
@@ -27,8 +28,62 @@ const addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
+    let transporter = nodemailer.createTransport({
+      host: "smtpout.secureserver.net",
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: "ankita@thefarsan.in", // generated ethereal user
+        pass: "Ankita@03", // generated ethereal password
+      },
+    });
 
     const createdOrder = await order.save();
+    const userDetails = await User.findById(req.user._id).select("-password");
+    // send mail with defined transport object
+    let info = await transporter.sendMail(
+      {
+        from: '"Ankita Malik" <ankita@thefarsan.in>', // sender address
+        to: `${userDetails.email}`, // list of receivers
+        subject: "Order Sucessfull", // Subject line
+        text: "Hello", // plain text body
+        html: ` <h2>Hi ${userDetails.name}</h2>
+        <h2>
+          Thank you for choosing Farsan. This email contains important information
+          about your order. Please save it for future reference.
+        </h2>
+        <div>
+          <a href="https://thefarsan.in/"
+            ><img
+              style="width: 20em"
+              src="https://i.ibb.co/t27NhR9/check-mark-correct-approved-icon-symbol-white-background-3d-illustration-removebg-preview.png"
+              alt="check-mark-correct-approved-icon-symbol-white-background-3d-illustration-removebg-preview"
+          /></a>
+          <h1>Order Placed</h1>
+          <div>
+            <h2>Order No: ${createdOrder._id}</h2>
+          </div>
+          <h2>
+            Warm Regards <br />
+            Team The Farsan
+          </h2>
+          <a href="https://thefarsan.in/"
+            ><img
+              style="width: 5em"
+              src="https://i.ibb.co/r4SscPz/The-Farsan.png"
+              alt="The-Farsan"
+          /></a>
+        </div>
+        `, // html body
+      },
+      (err, info) => {
+        if (err) {
+          return console.log(err);
+        } else {
+          console.log("Message sent: %s", info.messageId);
+        }
+      }
+    );
     res.status(200);
     res.json(createdOrder);
   }

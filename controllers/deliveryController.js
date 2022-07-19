@@ -30,4 +30,35 @@ const getMyAdresses = asyncHandler(async (req, res) => {
   res.json(adresses);
 });
 
-export { addDeliverAdress, getMyAdresses };
+const deleteAdress = asyncHandler(async (req, res) => {
+  const adress = await Delivery.findById(req.params.id);
+  if (adress) {
+    await adress.remove();
+    res.json({ message: "Adress deleted sucessfully" });
+  } else {
+    res.status(404);
+    throw new Error("Adress not found");
+  }
+});
+
+const updateAdress = asyncHandler(async (req, res) => {
+  const adress = await Delivery.findById(req.params.id);
+  if (adress) {
+    (adress.name = req.body.name || adress.name),
+      (adress.adressOne = req.body.adressOne || adress.adressOne),
+      (adress.pincode = req.body.pincode || adress.pincode);
+    adress.city = req.body.city || adress.city;
+    adress.state = req.body.state || adress.state;
+    adress.country = req.body.country || adress.country;
+
+    const updatedAdress = await adress.save();
+    const adresses = await Delivery.find({ user: req.user._id });
+
+    res.json(adresses);
+  } else {
+    res.status(404);
+    throw new Error("No Adress Found");
+  }
+});
+
+export { addDeliverAdress, getMyAdresses, deleteAdress, updateAdress };
