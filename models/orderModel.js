@@ -7,6 +7,9 @@ const orderSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
+    qrCode: {
+      type: String,
+    },
     orderItems: [
       {
         name: {
@@ -33,6 +36,9 @@ const orderSchema = mongoose.Schema(
       },
     ],
     shippingAdress: {
+      id: {
+        type: Number,
+      },
       adress: {
         type: String,
         required: true,
@@ -78,6 +84,10 @@ const orderSchema = mongoose.Schema(
     itemsPrice: {
       type: Number,
       required: true,
+      default: 0.0,
+    },
+    discountPrice: {
+      type: Number,
       default: 0.0,
     },
     shippingPrice: {

@@ -2,6 +2,7 @@ import Order from "../models/orderModel.js";
 import asyncHandler from "express-async-handler";
 import nodemailer from "nodemailer";
 import User from "../models/userModel.js";
+import QRCode from "qrcode";
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
@@ -9,9 +10,18 @@ const addOrderItems = asyncHandler(async (req, res) => {
     paymentMethod,
     itemsPrice,
     taxPrice,
+    discountPrice,
     shippingPrice,
     totalPrice,
   } = req.body;
+
+  const generateQR = async (text) => {
+    try {
+      return await QRCode.toDataURL(text);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
@@ -25,6 +35,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       paymentMethod,
       itemsPrice,
       taxPrice,
+      discountPrice,
       shippingPrice,
       totalPrice,
     });
@@ -39,6 +50,11 @@ const addOrderItems = asyncHandler(async (req, res) => {
     });
 
     const createdOrder = await order.save();
+
+    createdOrder.qrCode = await generateQR(
+      `https://thefarsan.in/order/${createdOrder._id}`
+    );
+    const updatedOrder = await createdOrder.save();
     const userDetails = await User.findById(req.user._id).select("-password");
     // send mail with defined transport object
     let info = await transporter.sendMail(
@@ -85,7 +101,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       }
     );
     res.status(200);
-    res.json(createdOrder);
+    res.json(updatedOrder);
   }
 });
 
