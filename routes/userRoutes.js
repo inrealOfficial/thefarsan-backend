@@ -6,6 +6,8 @@ import {
   getUserProfile,
   getUsers,
   registerUser,
+  resetUpdatePassword,
+  resetUserPassword,
   updateUser,
   updateUserProfile,
 } from "../controllers/userController.js";
@@ -23,4 +25,7 @@ router
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserByID)
   .put(protect, admin, updateUser);
+
+router.route("/forgotPassword").post(resetUserPassword);
+router.route("/reset").post(protect, resetUpdatePassword);
 export default router;

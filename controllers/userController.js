@@ -1,6 +1,8 @@
 import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
+import nodemailer from "nodemailer";
+import jwt from "jsonwebtoken";
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -130,6 +132,91 @@ const getUserByID = asyncHandler(async (req, res) => {
   }
 });
 
+const resetUpdatePassword = asyncHandler(async (req, res) => {
+  const { id, token, password } = req.body;
+  const user = await User.findById(id);
+  if (user) {
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        user.password = password;
+        const updatedUser = await user.save();
+        res.status(200);
+        res.json({ message: "Password Updated Sucessfully" });
+      } catch (error) {
+        res.status(401);
+        throw new Error("Not authorized, token failed");
+      }
+    }
+    if (!token) {
+      res.status(401);
+      throw new Error("Not Authorized, No Token Found");
+    }
+  } else {
+    res.status(400);
+    throw new Error("Not Valid");
+  }
+});
+
+const resetUserPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    let transporter = nodemailer.createTransport({
+      host: "smtpout.secureserver.net",
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: "ankita@thefarsan.in", // generated ethereal user
+        pass: "Ankita@03", // generated ethereal password
+      },
+    });
+
+    let info = await transporter.sendMail(
+      {
+        from: '"Ankita Malik" <ankita@thefarsan.in>', // sender address
+        to: `${email}`, // list of receivers
+        subject: "Reset Password Link", // Subject line
+        text: "Hello", // plain text body
+        html: ` <h2>Hi ${email}</h2>
+        <h2>
+          Click on the link below to Reset your password.
+        </h2>
+        <div>
+          <a href="https://thefarsan.in/reset/${userExists._id}/${generateToken(
+          userExists._id
+        )}"
+            >Click here</a>
+          
+          <h2>
+            Warm Regards <br />
+            Team The Farsan
+          </h2>
+          <a href="https://thefarsan.in/"
+            ><img
+              style="width: 5em"
+              src="https://i.ibb.co/r4SscPz/The-Farsan.png"
+              alt="The-Farsan"
+          /></a>
+        </div>
+        `, // html body
+      },
+      (err, info) => {
+        if (err) {
+          return console.log(err);
+        } else {
+          console.log("Message sent: %s", info.messageId);
+        }
+      }
+    );
+    res.status(200);
+    res.json({ message: "Reset Email Has been sent sucessfulyy" });
+  } else {
+    res.status(400);
+    throw new Error("No user found with that email");
+  }
+});
+
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
@@ -158,4 +245,6 @@ export {
   deleteUser,
   getUserByID,
   updateUser,
+  resetUserPassword,
+  resetUpdatePassword,
 };

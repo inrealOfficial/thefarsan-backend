@@ -20,9 +20,31 @@ const courseSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
-      required: true,
+    priceList: {
+      twofiveG: {
+        _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          auto: true,
+        },
+        price: {
+          type: Number,
+        },
+      },
+      fiveHunderedG: {
+        price: {
+          type: Number,
+        },
+      },
+      oneKg: {
+        price: {
+          type: Number,
+        },
+      },
+      twoKg: {
+        price: {
+          type: Number,
+        },
+      },
     },
   },
   {

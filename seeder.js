@@ -5,6 +5,8 @@ import courses from "./data/Courses.js";
 import User from "./models/userModel.js";
 import Course from "./models/courseModel.js";
 import connectDB from "./config/db.js";
+import Order from "./models/orderModel.js";
+import Delivery from "./models/deliveryAdressModel.js";
 
 dotenv.config();
 connectDB();
@@ -34,7 +36,8 @@ const destroyData = async () => {
   try {
     await Course.deleteMany();
     await User.deleteMany();
-
+    await Order.deleteMany();
+    await Delivery.deleteMany();
     console.log("Data Deleted");
     process.exit();
   } catch (error) {
