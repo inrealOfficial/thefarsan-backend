@@ -11,43 +11,31 @@ const sendSMS = asyncHandler(async (req, res) => {
     .services("VAe2e2008db7ec70d23cd2a7cc3245b4db")
     .verifications.create({ to: number, channel: "sms" })
     .then((verification) => {
-      console.log(verification.status);
       res.status(200);
-      res.json({ message: "message send sucessfully" });
+      res.json(verification);
     })
     .catch((err) => {
       throw new Error("Message could not be send");
     });
-  //   client.messages
-  //     .create({
-  //       body: "Hello from Node",
-  //       to: number, // Text this number
-  //       from: "+1 937 966 6165", // From a valid Twilio number
-  //     })
-  //     .then((message) => {
-  //       console.log(message.sid);
-  //       res.status(200);
-  //       res.json({ message: "message send sucessfully" });
-  //     })
-  //     .catch((err) => {
-  //       throw new Error("Message could not be send");
-  //     });
 });
 
 const verifyOtp = asyncHandler(async (req, res) => {
   const { number, OTPcode } = req.body;
-
-  client.verify.v2
-    .services("VAe2e2008db7ec70d23cd2a7cc3245b4db")
-    .verificationChecks.create({ to: number, code: OTPcode })
-    .then((verification_check) => {
-      console.log(verification_check.status);
+  try {
+    const value = await client.verify.v2
+      .services("VAe2e2008db7ec70d23cd2a7cc3245b4db")
+      .verificationChecks.create({ to: number, code: OTPcode });
+    if (value.status === "approved") {
       res.status(200);
-      res.json(verification_check);
-    })
-    .catch((err) => {
-      throw new Error("OTP Did not match");
-    });
+      res.json({ message: "phone number approved" });
+    } else {
+      res.status(400);
+      throw new Error("Invalid OTP");
+    }
+  } catch (error) {
+    res.status(400);
+    throw new Error("There was some error");
+  }
 });
 
 export { sendSMS, verifyOtp };
