@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
+import Reset from "../Templates/reset.js";
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -13,6 +14,9 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isEmailVerified: user.isEmailVerified,
+      isPhoneNumberVerified: user.isPhoneNumberVerified,
+      phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
     });
   } else {
@@ -22,7 +26,15 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, isGuest } = req.body;
+  const {
+    name,
+    email,
+    password,
+    isGuest,
+    phoneNumber,
+    isPhoneNumberVerified,
+    isEmailVerified,
+  } = req.body;
   if (isGuest) {
     const user = await User.create({
       name,
@@ -35,6 +47,9 @@ const registerUser = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        isEmailVerified: user.isEmailVerified,
+        isPhoneNumberVerified: user.isPhoneNumberVerified,
+        phoneNumber: user.phoneNumber,
         token: generateToken(user._id),
       });
     } else {
@@ -51,6 +66,10 @@ const registerUser = asyncHandler(async (req, res) => {
       name,
       email,
       password,
+      isGuest,
+      isEmailVerified,
+      phoneNumber,
+      isPhoneNumberVerified,
     });
 
     if (user) {
@@ -60,6 +79,9 @@ const registerUser = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        phoneNumber: user.phoneNumber,
+        isEmailVerified: user.isEmailVerified,
+        isPhoneNumberVerified: user.isPhoneNumberVerified,
         token: generateToken(user._id),
       });
     } else {
@@ -76,6 +98,10 @@ const getUserProfile = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      phoneNumber: user.phoneNumber,
+      isGuest: user.isGuest,
+      isEmailVerified: user.isEmailVerified,
+      isPhoneNumberVerified: user.isPhoneNumberVerified,
       isAdmin: user.isAdmin,
     });
   } else {
@@ -89,6 +115,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     (user.name = req.body.name || user.name),
       (user.email = req.body.email || user.email);
+    user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -98,6 +125,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      phoneNumber: user.phoneNumber,
       token: generateToken(updatedUser._id),
     });
   } else {
@@ -167,39 +195,22 @@ const resetUserPassword = asyncHandler(async (req, res) => {
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
-        user: "ankita@thefarsan.in", // generated ethereal user
-        pass: "Ankita@03", // generated ethereal password
+        user: "info@thefarsan.in", // generated ethereal user
+        pass: "Thefarsan@info", // generated ethereal password
       },
     });
 
     let info = await transporter.sendMail(
       {
-        from: '"Ankita Malik" <ankita@thefarsan.in>', // sender address
+        from: '"The Farsan" <info@thefarsan.in>', // sender address
         to: `${email}`, // list of receivers
         subject: "Reset Password Link", // Subject line
         text: "Hello", // plain text body
-        html: ` <h2>Hi ${email}</h2>
-        <h2>
-          Click on the link below to Reset your password.
-        </h2>
-        <div>
-          <a href="https://thefarsan.in/reset/${userExists._id}/${generateToken(
-          userExists._id
-        )}"
-            >Click here</a>
-          
-          <h2>
-            Warm Regards <br />
-            Team The Farsan
-          </h2>
-          <a href="https://thefarsan.in/"
-            ><img
-              style="width: 5em"
-              src="https://i.ibb.co/r4SscPz/The-Farsan.png"
-              alt="The-Farsan"
-          /></a>
-        </div>
-        `, // html body
+        html: `${Reset(
+          `https://thefarsan.in/reset/${userExists._id}/${generateToken(
+            userExists._id
+          )}`
+        )}`,
       },
       (err, info) => {
         if (err) {

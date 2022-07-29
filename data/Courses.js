@@ -1,78 +1,78 @@
 const courses = [
   {
-    name: "Lasan Farsan",
+    name: "MahaLaxmi Farsan",
     image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
+      "https://ik.imagekit.io/ejdxfrhyu/mahalaxmiNew_y6bPIbnd_f.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840528403",
     description: "Bombay Sev",
     priceList: {
       oneKg: {
-        price: 240,
+        price: 200,
       },
       twoKg: {
-        price: 480,
+        price: 360,
       },
       fiveHunderedG: {
-        price: 120,
+        price: 110,
       },
       twofiveG: {
         price: 60,
       },
     },
   },
+  // {
+  //   name: "Mahabaleshwar Farsan",
+  //   image:
+  //     "https://ik.imagekit.io/y9zybf6e7/Mahableshwar_hf5rqHh2B?ik-sdk-version=javascript-1.4.3&updatedAt=1658752196252",
+  //   description: "farsan description",
+  //   priceList: {
+  //     oneKg: {
+  //       price: 200,
+  //     },
+  //     twoKg: {
+  //       price: 360,
+  //     },
+  //     fiveHunderedG: {
+  //       price: 110,
+  //     },
+  //     twofiveG: {
+  //       price: 60,
+  //     },
+  //   },
+  // },
   {
-    name: "Mahabaleshwar Farsan",
+    name: "Bhelpuri Mix",
     image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan description",
-    priceList: {
-      oneKg: {
-        price: 240,
-      },
-      twoKg: {
-        price: 480,
-      },
-      fiveHunderedG: {
-        price: 120,
-      },
-      twofiveG: {
-        price: 60,
-      },
-    },
-  },
-  {
-    name: "All - in - All Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
+      "https://ik.imagekit.io/ejdxfrhyu/bhelpuri_WMSWKOuYY.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840526884",
     description: "farsan 3 description",
     priceList: {
       oneKg: {
-        price: 340,
+        price: 200,
       },
       twoKg: {
-        price: 680,
+        price: 360,
       },
       fiveHunderedG: {
-        price: 170,
+        price: 110,
       },
       twofiveG: {
-        price: 85,
+        price: 60,
       },
     },
   },
   {
-    name: "Kolhapuri Farsan",
+    name: "Tam Tam Mix",
     image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
+      "https://ik.imagekit.io/ejdxfrhyu/tamtammix__yDWjXgvd.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840529410",
     description: "farsan 4 description",
     priceList: {
       oneKg: {
-        price: 240,
+        price: 200,
       },
       twoKg: {
-        price: 480,
+        price: 360,
       },
       fiveHunderedG: {
-        price: 120,
+        price: 110,
       },
       twofiveG: {
         price: 60,
@@ -80,219 +80,219 @@ const courses = [
     },
   },
   {
-    name: "Sweet & Sour Farsan",
+    name: "Khatha Meetha",
     image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 240,
-      },
-      twoKg: {
-        price: 480,
-      },
-      fiveHunderedG: {
-        price: 120,
-      },
-      twofiveG: {
-        price: 60,
-      },
-    },
-  },
-  {
-    name: "Makai Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 240,
-      },
-      twoKg: {
-        price: 480,
-      },
-      fiveHunderedG: {
-        price: 120,
-      },
-      twofiveG: {
-        price: 60,
-      },
-    },
-  },
-  {
-    name: "Mix Bhel Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 250,
-      },
-      twoKg: {
-        price: 500,
-      },
-      fiveHunderedG: {
-        price: 125,
-      },
-      twofiveG: {
-        price: 62,
-      },
-    },
-  },
-  {
-    name: "Khati Mix Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 240,
-      },
-      twoKg: {
-        price: 480,
-      },
-      fiveHunderedG: {
-        price: 120,
-      },
-      twofiveG: {
-        price: 60,
-      },
-    },
-  },
-  {
-    name: "Dal Moth Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 240,
-      },
-      twoKg: {
-        price: 480,
-      },
-      fiveHunderedG: {
-        price: 120,
-      },
-      twofiveG: {
-        price: 60,
-      },
-    },
-  },
-  {
-    name: "Kolhapuri Mix Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 320,
-      },
-      twoKg: {
-        price: 640,
-      },
-      fiveHunderedG: {
-        price: 160,
-      },
-      twofiveG: {
-        price: 80,
-      },
-    },
-  },
-  {
-    name: "Mahalaxmi Farsan",
-    image:
-      "https://res.cloudinary.com/dhljctjzx/image/upload/v1658497785/mahalaxmi_uiua20.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 240,
-      },
-      twoKg: {
-        price: 480,
-      },
-      fiveHunderedG: {
-        price: 120,
-      },
-      twofiveG: {
-        price: 60,
-      },
-    },
-  },
-  {
-    name: "R.K Mix Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 325,
-      },
-      twoKg: {
-        price: 650,
-      },
-      fiveHunderedG: {
-        price: 160,
-      },
-      twofiveG: {
-        price: 80,
-      },
-    },
-  },
-  {
-    name: "Tum Tum Mix Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
-    description: "farsan 5 description",
-    priceList: {
-      oneKg: {
-        price: 240,
-      },
-      twoKg: {
-        price: 480,
-      },
-      fiveHunderedG: {
-        price: 120,
-      },
-      twofiveG: {
-        price: 60,
-      },
-    },
-  },
-  {
-    name: "Manglori Mix Farsan",
-    image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
+      "https://ik.imagekit.io/ejdxfrhyu/khatametha_vDPZc-zID.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840527289",
     description: "farsan 5 description",
     priceList: {
       oneKg: {
         price: 200,
       },
       twoKg: {
-        price: 400,
+        price: 360,
+      },
+      fiveHunderedG: {
+        price: 110,
+      },
+      twofiveG: {
+        price: 60,
+      },
+    },
+  },
+  {
+    name: "Kolapuri Mix",
+    image:
+      "https://ik.imagekit.io/ejdxfrhyu/kohlapuri_KOe1AcOD_.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840527777",
+    description: "farsan 5 description",
+    priceList: {
+      oneKg: {
+        price: 200,
+      },
+      twoKg: {
+        price: 360,
+      },
+      fiveHunderedG: {
+        price: 110,
+      },
+      twofiveG: {
+        price: 60,
+      },
+    },
+  },
+  // {
+  //   name: "a",
+  //   image:
+  //     "https://ik.imagekit.io/y9zybf6e7/a_VN9rUMheI?ik-sdk-version=javascript-1.4.3&updatedAt=1658754942911",
+  //   description: "farsan 5 description",
+  //   priceList: {
+  //     oneKg: {
+  //       price: 200,
+  //     },
+  //     twoKg: {
+  //       price: 360,
+  //     },
+  //     fiveHunderedG: {
+  //       price: 110,
+  //     },
+  //     twofiveG: {
+  //       price: 62,
+  //     },
+  //   },
+  // },
+  // {
+  //   name: "b",
+  //   image:
+  //     "https://ik.imagekit.io/y9zybf6e7/b_3JwAorX7d?ik-sdk-version=javascript-1.4.3&updatedAt=1658755742196",
+  //   description: "farsan 5 description",
+  //   priceList: {
+  //     oneKg: {
+  //       price: 200,
+  //     },
+  //     twoKg: {
+  //       price: 360,
+  //     },
+  //     fiveHunderedG: {
+  //       price: 110,
+  //     },
+  //     twofiveG: {
+  //       price: 60,
+  //     },
+  //   },
+  // },
+  {
+    name: "All-in-One",
+    image:
+      "https://ik.imagekit.io/ejdxfrhyu/allinone_9NBzcv-hg.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840526594",
+    description: "farsan 5 description",
+    priceList: {
+      oneKg: {
+        price: 200,
+      },
+      twoKg: {
+        price: 360,
+      },
+      fiveHunderedG: {
+        price: 110,
+      },
+      twofiveG: {
+        price: 60,
+      },
+    },
+  },
+  {
+    name: "R K Mix",
+    image:
+      "https://ik.imagekit.io/ejdxfrhyu/rkmix_MW7UU9akgQ.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840529078",
+    description: "farsan 5 description",
+    priceList: {
+      oneKg: {
+        price: 200,
+      },
+      twoKg: {
+        price: 360,
+      },
+      fiveHunderedG: {
+        price: 110,
+      },
+      twofiveG: {
+        price: 60,
+      },
+    },
+  },
+  {
+    name: "Lasan Chidva",
+    image:
+      "https://ik.imagekit.io/ejdxfrhyu/lasan_nitOiIYGVO.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840527998",
+    description: "farsan 5 description",
+    priceList: {
+      oneKg: {
+        price: 200,
+      },
+      twoKg: {
+        price: 360,
+      },
+      fiveHunderedG: {
+        price: 110,
+      },
+      twofiveG: {
+        price: 60,
+      },
+    },
+  },
+  {
+    name: "Ahemdabad Mix",
+    image:
+      "https://ik.imagekit.io/ejdxfrhyu/ahmemdabad_mix_qSpWdMeOf.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840526602",
+    description: "farsan 5 description",
+    priceList: {
+      oneKg: {
+        price: 200,
+      },
+      twoKg: {
+        price: 360,
+      },
+      fiveHunderedG: {
+        price: 110,
+      },
+      twofiveG: {
+        price: 60,
+      },
+    },
+  },
+  {
+    name: "Makai Chidva",
+    image:
+      "https://ik.imagekit.io/ejdxfrhyu/makai_aOnd6LKn_.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658840528724",
+    description: "farsan 5 description",
+    priceList: {
+      oneKg: {
+        price: 200,
+      },
+      twoKg: {
+        price: 360,
+      },
+      fiveHunderedG: {
+        price: 110,
+      },
+      twofiveG: {
+        price: 60,
+      },
+    },
+  },
+  {
+    name: "Dal Biji",
+    image:
+      "https://ik.imagekit.io/ejdxfrhyu/dalbhiji.jpg_HFaogC2VC.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658841355811",
+    description: "farsan 5 description",
+    priceList: {
+      oneKg: {
+        price: 180,
+      },
+      twoKg: {
+        price: 340,
       },
       fiveHunderedG: {
         price: 100,
       },
       twofiveG: {
-        price: 50,
+        price: 40,
       },
     },
   },
   {
-    name: "PILA MADARAS",
+    name: "Kolkata Mix",
     image:
-      "https://i.ibb.co/fdh55sX/bombay-mix-chanachur-chiwda-farsan-is-indian-snack-mix-popular-tea-time-food-from-india-min-removebg.png",
+      "https://ik.imagekit.io/ejdxfrhyu/kolkatamix_roBBq_nX1.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658841355917",
     description: "farsan 5 description",
     priceList: {
       oneKg: {
-        price: 240,
+        price: 260,
       },
       twoKg: {
-        price: 480,
+        price: 360,
       },
       fiveHunderedG: {
-        price: 120,
+        price: 110,
       },
       twofiveG: {
         price: 60,

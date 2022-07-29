@@ -4,12 +4,14 @@ import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import smsRoutes from "./routes/smsRoutes.js";
 import deliveryAdressRoutes from "./routes/deliveryAdressRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 import Razorpay from "razorpay";
 import path from "path";
 import nodemailer from "nodemailer";
+import twilio from "twilio";
 
 dotenv.config();
 connectDB();
@@ -61,6 +63,7 @@ app.post("/send", async (req, res) => {
   );
 });
 // app.use(cors(corsOptions));
+app.use("/api/sms", smsRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);

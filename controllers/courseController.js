@@ -17,4 +17,18 @@ const getCourseById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getCourseById, getCourses };
+const deleteProduct = asyncHandler(async (req, res) => {
+  const course = await Course.findById(req.params.id);
+
+  if (course) {
+    await course.remove();
+    res.json({
+      message: "Products removed",
+    });
+  } else {
+    res.status(404);
+    throw new Error("Course not Found");
+  }
+});
+
+export { getCourseById, getCourses, deleteProduct };
