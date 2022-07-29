@@ -39,6 +39,11 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
       name,
       email,
+      isGuest: true,
+      password: password,
+      isEmailVerified,
+      phoneNumber,
+      isPhoneNumberVerified,
     });
     if (user) {
       res.status(201);
