@@ -37,7 +37,7 @@ const orderSchema = mongoose.Schema(
     ],
     shippingAdress: {
       id: {
-        type: Number,
+        type: String,
       },
       adress: {
         type: String,

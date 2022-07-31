@@ -4,6 +4,7 @@ import generateToken from "../utils/generateToken.js";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import Reset from "../Templates/reset.js";
+import welcome from "../Templates/welcome.js";
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -45,7 +46,33 @@ const registerUser = asyncHandler(async (req, res) => {
       phoneNumber,
       isPhoneNumberVerified,
     });
+    let transporter = nodemailer.createTransport({
+      host: "smtpout.secureserver.net",
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: "ankita@thefarsan.in", // generated ethereal user
+        pass: "Ankita@03", // generated ethereal password
+      },
+    });
+
     if (user) {
+      let info = await transporter.sendMail(
+        {
+          from: '"The Farsan" <info@thefarsan.in>', // sender address
+          to: `${email}`, // list of receivers
+          subject: "Welcome to the Farsan", // Subject line
+          text: "Hello", // plain text body
+          html: `${welcome(`${user.name}`)}`,
+        },
+        (err, info) => {
+          if (err) {
+            return console.log(err);
+          } else {
+            console.log("Message sent: %s", info.messageId);
+          }
+        }
+      );
       res.status(201);
       res.json({
         _id: user._id,
@@ -78,6 +105,31 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (user) {
+      let transporter = nodemailer.createTransport({
+        host: "smtpout.secureserver.net",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: "ankita@thefarsan.in", // generated ethereal user
+          pass: "Ankita@03", // generated ethereal password
+        },
+      });
+      let info = await transporter.sendMail(
+        {
+          from: '"The Farsan" <info@thefarsan.in>', // sender address
+          to: `${email}`, // list of receivers
+          subject: "Welcome to the Farsan", // Subject line
+          text: "Hello", // plain text body
+          html: `${welcome(`${user.name}`)}`,
+        },
+        (err, info) => {
+          if (err) {
+            return console.log(err);
+          } else {
+            console.log("Message sent: %s", info.messageId);
+          }
+        }
+      );
       res.status(201);
       res.json({
         _id: user._id,
