@@ -5,6 +5,7 @@ import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import smsRoutes from "./routes/smsRoutes.js";
+import couponRoutes from "./routes/couponsRoutes.js";
 import deliveryAdressRoutes from "./routes/deliveryAdressRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
@@ -68,6 +69,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/delivery", deliveryAdressRoutes);
+app.use("/api/coupons", couponRoutes);
 app.get("/api/config/razorpay", (req, res) =>
   res.send(process.env.RAZORPAY_KEY_ID)
 );
