@@ -120,4 +120,86 @@ const getMyOrders = asyncHandler(async (req, res) => {
   res.json(orders);
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
+const getAllOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate("user", "id name");
+  res.json(orders);
+});
+
+const deleteOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    await order.remove();
+    res.json({ message: "Order deleted sucessfully" });
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+const updateOrderToDelivered = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isDelivered = true;
+    order.deliverdAt = Date.now();
+
+    let transporter = nodemailer.createTransport({
+      host: "smtpout.secureserver.net",
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: "ankita@thefarsan.in", // generated ethereal user
+        pass: "Ankita@03", // generated ethereal password
+      },
+    });
+    const updatedOrder = await order.save();
+    const userDetails = await User.findById(order.user).select("-password");
+    let info = await transporter.sendMail(
+      {
+        from: '"The Farsan" <info@thefarsan.in>', // sender address
+        to: `${userDetails.email}`, // list of receivers
+        subject: `Order Sucessfully Delivered #ORD${updatedOrder._id}`, // Subject line
+        text: "Hello", // plain text body
+        html: `${orderCreated(updatedOrder, userDetails.name)}`, // html body
+      },
+      (err, info) => {
+        if (err) {
+          return console.log(err);
+        } else {
+          console.log("Message sent: %s", info.messageId);
+        }
+      }
+    );
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+const updateOrderStage = asyncHandler(async (req, res) => {
+  const { stage } = req.body;
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.deliveryStage = stage;
+
+    const updatedOrder = await order.save();
+
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+export {
+  addOrderItems,
+  getOrderById,
+  updateOrderToPaid,
+  getMyOrders,
+  getAllOrders,
+  updateOrderToDelivered,
+  updateOrderStage,
+  deleteOrder,
+};

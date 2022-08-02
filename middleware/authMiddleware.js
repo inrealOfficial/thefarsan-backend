@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 const protect = asyncHandler(async (req, res, next) => {
   let token;
-  console.log(req.headers.authorization);
+  console.log(req.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")

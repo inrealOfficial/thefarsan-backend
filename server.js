@@ -6,13 +6,13 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import smsRoutes from "./routes/smsRoutes.js";
 import couponRoutes from "./routes/couponsRoutes.js";
+import sendAnEmail from "./routes/sendAnEmail.js";
 import deliveryAdressRoutes from "./routes/deliveryAdressRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 import Razorpay from "razorpay";
 import path from "path";
 import nodemailer from "nodemailer";
-import twilio from "twilio";
 
 dotenv.config();
 connectDB();
@@ -64,6 +64,7 @@ app.post("/send", async (req, res) => {
   );
 });
 // app.use(cors(corsOptions));
+app.use("/api/email", sendAnEmail);
 app.use("/api/sms", smsRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);

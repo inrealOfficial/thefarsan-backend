@@ -116,6 +116,10 @@ const orderSchema = mongoose.Schema(
     deliverdAt: {
       type: Date,
     },
+    deliveryStage: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
