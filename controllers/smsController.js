@@ -1,10 +1,10 @@
 import asyncHandler from "express-async-handler";
 import twilio from "twilio";
+import dotenv from "dotenv";
 
-const client = new twilio(
-  "ACf1a2dac689f76091adc627ca404c3699",
-  "58f2ebab7f686d74a955e6a1be76880e"
-);
+dotenv.config();
+
+const client = new twilio(process.env.AUTH_ID, process.env.AUTH_TOKEN);
 const sendSMS = asyncHandler(async (req, res) => {
   const { number } = req.body;
   client.verify.v2
