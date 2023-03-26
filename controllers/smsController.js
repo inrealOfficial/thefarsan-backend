@@ -3,7 +3,7 @@ import twilio from "twilio";
 
 const client = new twilio(
   "ACf1a2dac689f76091adc627ca404c3699",
-  "b406b67fec39064923311c951bee8396"
+  "58f2ebab7f686d74a955e6a1be76880e"
 );
 const sendSMS = asyncHandler(async (req, res) => {
   const { number } = req.body;
